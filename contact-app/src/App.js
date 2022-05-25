@@ -101,6 +101,21 @@ const App = () => {
     setEditFormData(formValues);
   };
 
+  //handeling cancel clik "cancel button"
+  const handleCancelClick = () => {
+    setEditContactId(null);
+  };
+
+  const handleDeleteClick = (contactId) => {
+    const newContacts = [...contacts];
+
+    const index = contacts.findIndex((contact) => contact.id === contactId)
+    //The splice method helps to remove the contact object from the given index from the array
+    newContacts.splice(index, 1);
+
+    setContacts(newContacts);
+  }
+
   //tabel for the JSON data
   return ( 
     <div className="app-container">
@@ -115,17 +130,22 @@ const App = () => {
               <th>Actions</th>
             </tr>
           </thead>
+          
           <tbody>
             {contacts.map((contact) => (
               <Fragment>
                   { editContactId === contact.id ? (
                     <EditRow 
                       editFormData={editFormData} 
-                      handleEditFormChange={handleEditFormChange}/>
+                      handleEditFormChange={handleEditFormChange}
+                      handleCancelClick = {handleCancelClick}
+                    />
                    ) : (
-                   <ReadOnlyRow 
-                    contact={contact} 
-                    handleEditClick={handleEditClick}/>
+                    <ReadOnlyRow 
+                      contact={contact} 
+                      handleEditClick={handleEditClick}
+                      handleDeleteClick={handleDeleteClick}
+                    />
                    )}
               </Fragment>
             ))}

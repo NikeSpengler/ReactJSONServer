@@ -1,7 +1,7 @@
 import React from 'react';
 
-//Arrow function for adding new data to the table
-const ReadOnlyRow = ({ contact, handleEditClick }) => {
+//Arrow function for adding new data to the table, also handling edit and delete button
+const ReadOnlyRow = ({ contact, handleEditClick, handleDeleteClick }) => {
     return ( 
         <tr>
             <td>{contact.fullName}</td>
@@ -12,6 +12,11 @@ const ReadOnlyRow = ({ contact, handleEditClick }) => {
                 <button 
                     type="button" 
                     onClick={(event) => handleEditClick(event, contact)}>Edit
+                </button>
+                
+                <button 
+                    type="button" 
+                    onClick={() => handleDeleteClick(contact.id)}>Delete
                 </button>
             </td>
         </tr>
